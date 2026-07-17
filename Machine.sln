@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExeLocal", "ExeLocal\ExeLoc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExeOperateur", "ExeOperateur\ExeOperateur.csproj", "{D8AAF1BB-97DF-4D03-8AE0-2A8444953AD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesDistant", "AccesDistant\AccesDistant.csproj", "{E6C223A5-2E2F-8A30-943C-F9701B6C44CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourDistant", "FourDistant\FourDistant.csproj", "{4DD865D0-8FC7-44DB-82C3-1F4B3DE6CBDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{D8AAF1BB-97DF-4D03-8AE0-2A8444953AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8AAF1BB-97DF-4D03-8AE0-2A8444953AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8AAF1BB-97DF-4D03-8AE0-2A8444953AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C223A5-2E2F-8A30-943C-F9701B6C44CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C223A5-2E2F-8A30-943C-F9701B6C44CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C223A5-2E2F-8A30-943C-F9701B6C44CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C223A5-2E2F-8A30-943C-F9701B6C44CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DD865D0-8FC7-44DB-82C3-1F4B3DE6CBDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DD865D0-8FC7-44DB-82C3-1F4B3DE6CBDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DD865D0-8FC7-44DB-82C3-1F4B3DE6CBDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DD865D0-8FC7-44DB-82C3-1F4B3DE6CBDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

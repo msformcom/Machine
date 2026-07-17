@@ -19,31 +19,37 @@ namespace ExeLocal
             this.options = options;
         }
 
-        public async Task<IEnumerable<IHistoriqueItem>> GetHistorique()
+        public  Task<IEnumerable<IHistoriqueItem>> GetHistorique()
         {
-            lock (FlagFichier)
+            return Task.Run(async() =>
             {
-                EnsureFileExist();
-                using (var f = File.Open(Path.Combine(options.Directory, options.FileName), FileMode.Open, FileAccess.Read))
+                await Task.Delay(200);
+                lock (FlagFichier)
                 {
-                    using (var sr = new StreamReader(f))
+                    EnsureFileExist();
+                    using (var f = File.Open(Path.Combine(options.Directory, options.FileName), FileMode.Open, FileAccess.Read))
                     {
-                        var chaine = sr.ReadToEnd();
-                       
-                        var lignes = chaine.Split("\r\n")
-                            .Where(c=>!String.IsNullOrWhiteSpace(c))
-                            .Select(c => c.Split(";"))
-                            
-                            .Select(c => new HistoriqueItem()
-                            {
-                                Date = DateTime.Parse(c[0]),
-                                Valeur = Double.Parse(c[1])
-                            });
-                        var r=lignes.ToList();
-                        return r;
+                        using (var sr = new StreamReader(f))
+                        {
+                            var chaine = sr.ReadToEnd();
+
+                            var lignes = chaine.Split("\r\n")
+                                .Where(c => !String.IsNullOrWhiteSpace(c))
+                                .Select(c => c.Split(";"))
+
+                                .Select(c => new HistoriqueItem()
+                                {
+                                    Date = DateTime.Parse(c[0]),
+                                    Valeur = Double.Parse(c[1])
+                                } as IHistoriqueItem);
+
+                            return lignes;
+                        }
                     }
                 }
-            }
+            });
+
+
         }
 
         void EnsureFileExist()
@@ -70,7 +76,7 @@ namespace ExeLocal
 
                     using (var sw = new StreamWriter(f))
                     {
-                        sw.Write(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"));
+                        sw.Write(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
                         sw.Write(";");
                         sw.WriteLine(temp);
                     }
@@ -84,9 +90,9 @@ namespace ExeLocal
         public Task<double> GetTemperature()
         {
 
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
-
+                await Task.Delay(200);
                 var r = new Random();
                 var temp = r.NextDouble() * 100;
                 SaveTempInHistory(temp);

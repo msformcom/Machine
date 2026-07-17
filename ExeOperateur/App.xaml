@@ -2,8 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ExeOperateur"
+             xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate x:Key="IHistoriqueItemTemplate" DataType="{x:Type  interfaces:IHistoriqueItem }">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Date, StringFormat= 'yyyy-MM-dd HH:mm:ss'}"></TextBlock>
+                <TextBlock Text=" - "></TextBlock>
+                <TextBlock Text="{Binding Valeur}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
     </Application.Resources>
 </Application>

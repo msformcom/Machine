@@ -1,5 +1,8 @@
-public interface IHistoriqueItem
+namespace Interfaces
 {
-    public DateTime Date { get; set; }
-    public Double Valeur { get; set; }
+    public interface IHistoriqueItem
+    {
+        public DateTime Date { get; set; }
+        public Double Valeur { get; set; }
+    }
 }

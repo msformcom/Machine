@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,22 +18,37 @@ namespace ExeOperateur
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    [INotifyPropertyChanged]
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
+           
             InitializeComponent();
+            // je considère la class codebehind comme ViewModel
+            this.DataContext = this;
+            DispatcherTimer t = new DispatcherTimer();
+            t.Interval = TimeSpan.FromSeconds(5);
+           
+            t.Tick += (o,e)=>ReadDatas();
+            t.Start();
+            ReadDatas();
+   
+        }
+
+
+
+        void ReadDatas()
+        {
             var four = App.Services.GetRequiredService<IFour>();
-            var temp = four.GetTemperature().ContinueWith(t =>
+            four.GetTemperature().ContinueWith(t =>
             {
-                var temp = t.Result;
+                this.LastTemp = t.Result;
             });
             four.GetHistorique().ContinueWith(t =>
             {
-       
-                    this.Historique = t.Result;
-            
-
+                var result = t.Result.ToList();
+                this.Historique = t.Result.OrderByDescending(c=>c.Date).Take(20).ToList();
             });
         }
 
@@ -51,8 +68,10 @@ namespace ExeOperateur
 
         //         }
 
+        [ObservableProperty]
+        private Double? _LastTemp;
 
-
-        public IEnumerable<IHistoriqueItem> Historique { get; set; }
+        [ObservableProperty]
+        private IEnumerable<IHistoriqueItem> _Historique;
     }
 }

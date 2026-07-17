@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExeOperateur"
         mc:Ignorable="d"
+        d:DataContext="local:MainWindow"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+   
+    <StackPanel>
+        <TextBlock Text="{Binding LastTemp}"></TextBlock>
+        <ItemsControl ItemsSource="{Binding Historique}" ItemTemplate="{StaticResource IHistoriqueItemTemplate}"></ItemsControl>
+    </StackPanel>
 </Window>
