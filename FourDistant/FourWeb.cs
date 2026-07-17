@@ -11,6 +11,8 @@ namespace FourDistant
         {
             this.client = client;
         }
+
+        public Func<double, bool> ValeurValide { get; set; }
         public async Task<IEnumerable<IHistoriqueItem>> GetHistorique()
         {
             var reponse = await client.GetAsync("GetHistorique");
@@ -23,6 +25,8 @@ namespace FourDistant
         {
             // Attente du stream de réponse de la part du serveur
             var reponse = await client.GetAsync("GetTemperature");
+
+
             // Lecture et déserialisation du stream en un double
             var o = await reponse.Content.ReadFromJsonAsync<double>();
             return o;
